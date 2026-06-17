@@ -22,42 +22,117 @@ function addPatient() {
   }
   function generateReport() {
     const numPatients = patients.length;
-    const conditionsCount = {
-      Diabetes: 0,
-      Thyroid: 0,
-      "High Blood Pressure": 0,
-    };
-    const genderConditionsCount = {
-      Male: {
-        Diabetes: 0,
-        Thyroid: 0,
-        "High Blood Pressure": 0,
-      },
-      Female: {
-        Diabetes: 0,
-        Thyroid: 0,
-        "High Blood Pressure": 0,
-      },
-    };
+    const conditionsCount = {};
+    const genderConditionsCount = {};
 
     for (const patient of patients) {
-      conditionsCount[patient.condition]++;
-      genderConditionsCount[patient.gender][patient.condition]++;
+        if (!conditionsCount[patient.condition]) {
+          conditionsCount[patient.condition] = 0;
+        }
+        conditionsCount[patient.condition]++;
+
+        if (!genderConditionsCount[patient.gender]) {
+          genderConditionsCount[patient.gender] = {};
+        }
+        if (!genderConditionsCount[patient.gender][patient.condition]) {
+          genderConditionsCount[patient.gender][patient.condition] = 0;
+        }
+        genderConditionsCount[patient.gender][patient.condition]++;
     }
 
-    report.innerHTML = `Number of patients: ${numPatients}<br><br>`;
-    report.innerHTML += `Conditions Breakdown:<br>`;
-    for (const condition in conditionsCount) {
-      report.innerHTML += `${condition}: ${conditionsCount[condition]}<br>`;
-    }
+      const knownConditions = [
+        "Diabetes",
+        "Thyroid",
+        "High Blood Pressure",
+        "Asthma",
+        "Anemia",
+        "Arthritis",
+        "Migraine",
+      ];
 
-    report.innerHTML += `<br>Gender-Based Conditions:<br>`;
-    for (const gender in genderConditionsCount) {
-      report.innerHTML += `${gender}:<br>`;
-      for (const condition in genderConditionsCount[gender]) {
-        report.innerHTML += `&nbsp;&nbsp;${condition}: ${genderConditionsCount[gender][condition]}<br>`;
+      const knownGenders = ["Male", "Female"];
+
+      for (const condition of knownConditions) {
+        if (!conditionsCount[condition]) {
+          conditionsCount[condition] = 0;
+        }
       }
+
+      for (const gender of knownGenders) {
+        if (!genderConditionsCount[gender]) {
+          genderConditionsCount[gender] = {};
+        }
+
+        for (const condition of knownConditions) {
+          if (!genderConditionsCount[gender][condition]) {
+            genderConditionsCount[gender][condition] = 0;
+          }
+        }
+      }
+
+    if (numPatients === 0) {
+      report.innerHTML = `
+        <div class="report-empty">
+          <span class="report-kicker">Analysis report</span>
+          <h3>No patients yet</h3>
+          <p>Add a patient to see the summary, condition breakdown, and gender-based counts here.</p>
+        </div>
+      `;
+      return;
     }
+
+    const conditionCards = knownConditions
+      .map((condition) => {
+        return `
+          <div class="report-item">
+            <span>${condition}</span>
+            <strong>${conditionsCount[condition]}</strong>
+          </div>
+        `;
+      })
+      .join("");
+
+    const genderSections = knownGenders
+      .map((gender) => {
+        const genderCards = knownConditions
+          .map((condition) => {
+            return `
+              <div class="report-item report-item-compact">
+                <span>${condition}</span>
+                <strong>${genderConditionsCount[gender][condition]}</strong>
+              </div>
+            `;
+          })
+          .join("");
+
+        return `
+          <section class="report-subsection">
+            <h5>${gender}</h5>
+            <div class="report-grid report-grid-compact">${genderCards}</div>
+          </section>
+        `;
+      })
+      .join("");
+
+    report.innerHTML = `
+      <section class="report-summary">
+        <span class="report-kicker">Analysis report</span>
+        <h3>Patient Summary</h3>
+        <p>Overview of the patients currently added to the system.</p>
+        <div class="report-total">${numPatients}</div>
+        <span class="report-total-label">Total patients added</span>
+      </section>
+
+      <section class="report-section">
+        <h4>Condition Breakdown</h4>
+        <div class="report-grid">${conditionCards}</div>
+      </section>
+
+      <section class="report-section">
+        <h4>Gender-Based Conditions</h4>
+        <div class="report-subsections">${genderSections}</div>
+      </section>
+    `;
   }
 
 addPatientButton.addEventListener("click", addPatient);
@@ -78,7 +153,9 @@ function searchCondition() {
           const treatment = condition.treatment;
 
           resultDiv.innerHTML += `<h2>${condition.name}</h2>`;
-          resultDiv.innerHTML += `<img src="${condition.imagesrc}" alt="hjh">`;
+          if (condition.imagesrc) {
+            resultDiv.innerHTML += `<img src="${condition.imagesrc}" alt="${condition.name}">`;
+          }
 
           resultDiv.innerHTML += `<p><strong>Symptoms:</strong> ${symptoms}</p>`;
           resultDiv.innerHTML += `<p><strong>Prevention:</strong> ${prevention}</p>`;

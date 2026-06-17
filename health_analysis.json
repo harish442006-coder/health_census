@@ -50,6 +50,70 @@
           "Maintain a healthy weight"
         ],
         "treatment": "Medications like ACE inhibitors or diuretics may be prescribed."
+      },
+      {
+        "name": "Asthma",
+        "imagesrc": "https://content.presspage.com/uploads/1483/1920_asthma-423761.jpg?10000",
+        "symptoms": [
+          "Shortness of breath",
+          "Wheezing",
+          "Coughing",
+          "Chest tightness"
+        ],
+        "prevention": [
+          "Avoid triggers like smoke and dust",
+          "Use prescribed inhalers correctly",
+          "Monitor symptoms regularly"
+        ],
+        "treatment": "Inhalers and anti-inflammatory medicines help control symptoms."
+      },
+      {
+        "name": "Anemia",
+        "imagesrc": "https://healthjade.com/wp-content/uploads/2018/01/anemia.jpg",
+        "symptoms": [
+          "Fatigue",
+          "Pale skin",
+          "Dizziness",
+          "Shortness of breath"
+        ],
+        "prevention": [
+          "Eat iron-rich foods",
+          "Include vitamin B12 and folate in your diet",
+          "Treat underlying causes early"
+        ],
+        "treatment": "Treatment may include iron supplements, vitamins, or medical care for the cause."
+      },
+      {
+        "name": "Arthritis",
+        "imagesrc": "https://en.mediko.ph/wp-content/uploads/sites/2/2025/02/DALL%C2%B7E-2025-02-06-11.13.19-A-vector-style-medical-illustration-depicting-the-symptoms-of-arthritis.-The-image-includes-a-detailed-view-of-joints-such-as-the-knee-hand-and-spin-640x366.webp",
+        "symptoms": [
+          "Joint pain",
+          "Stiffness",
+          "Swelling",
+          "Reduced range of motion"
+        ],
+        "prevention": [
+          "Stay physically active",
+          "Maintain a healthy weight",
+          "Protect your joints from strain"
+        ],
+        "treatment": "Treatment may include pain relief, exercise, and anti-inflammatory medicine."
+      },
+      {
+        "name": "Migraine",
+        "imagesrc": "https://tse1.mm.bing.net/th/id/OIP.HN_xzLoU28VeMYOzx-koiAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "symptoms": [
+          "Throbbing headache",
+          "Nausea",
+          "Sensitivity to light",
+          "Sensitivity to sound"
+        ],
+        "prevention": [
+          "Get enough sleep",
+          "Stay hydrated",
+          "Identify and avoid triggers"
+        ],
+        "treatment": "Rest, prescribed medicine, and trigger management can reduce migraine attacks."
       }
     ]
   }

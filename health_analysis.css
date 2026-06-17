@@ -1,99 +1,418 @@
-/* Basic CSS for the navigation bar */
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.container{
-    padding:1rem;
-    margin:0 1rem;
+:root {
+  --bg: #eef4f1;
+  --surface: rgba(255, 255, 255, 0.88);
+  --surface-strong: #ffffff;
+  --text: #173126;
+  --muted: #5f7268;
+  --primary: #1f7a57;
+  --primary-dark: #165940;
+  --accent: #e7f4ee;
+  --border: rgba(23, 49, 38, 0.12);
+  --shadow: 0 18px 45px rgba(23, 49, 38, 0.12);
+  --radius: 20px;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(31, 122, 87, 0.12), transparent 36%),
+    radial-gradient(circle at top right, rgba(116, 172, 145, 0.12), transparent 32%),
+    linear-gradient(180deg, #f8fbf9 0%, var(--bg) 100%);
+  min-height: 100vh;
 }
 
 nav {
-    background-color: #f0f0f0;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-  }
-  
-  nav ul {
-    list-style-type: none;
-    /* padding: 0; */
-  }
-  
-  nav ul li {
-    display: inline;
-    margin-right: 10px;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  /* Basic CSS for the form elements */
-  body {
-    font-family: Arial, sans-serif;
-    /* margin: 20px; */
-  }
-  
-  h1 {
-    margin-bottom: 20px;
-  }
-  
-  div {
-    margin-bottom: 10px;
-  }
-  
-  label {
-    display: inline-block;
-    width: 100px;
-  }
-  
-  input[type="text"],
-  input[type="number"],
-  select {
-    width: 200px;
-    padding: 5px;
-  }
-  
-  button {
-    padding: 7px 15px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  /* Basic CSS for the report section */
-  h2 {
-    margin-top: 30px;
-  }
-  
-  #report,#result {
-    padding: 10px;
-    max-width: 400px;
-    word-wrap: break-word;
-  }
-#result{
-  height: 400px;
-  width: 500px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(23, 49, 38, 0.08);
+  box-shadow: 0 8px 30px rgba(23, 49, 38, 0.05);
 }
-  #result img{
-    width: 200px;
-    height: 100px;
+
+nav h1 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--primary-dark);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+nav ul li {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--primary-dark);
+  font-weight: 700;
+  background: rgba(231, 244, 238, 0.85);
+  border: 1px solid transparent;
+  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  transform: translateY(-1px);
+  background: #d8efe4;
+  border-color: rgba(31, 122, 87, 0.18);
+  outline: none;
+}
+
+nav input[type="text"] {
+  width: min(240px, 48vw);
+  padding: 0.75rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-strong);
+  color: var(--text);
+  box-shadow: inset 0 1px 2px rgba(23, 49, 38, 0.05);
+}
+
+nav input[type="text"]:focus {
+  outline: 2px solid rgba(31, 122, 87, 0.25);
+  border-color: rgba(31, 122, 87, 0.35);
+}
+
+.container {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 1.5rem auto 3rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.analysisForm,
+#contactForm,
+.searchCondition {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.analysisForm,
+.searchCondition {
+  padding: 1.5rem;
+}
+
+.analysisForm h1,
+.analysisForm h2,
+.searchCondition h2,
+#contactForm h2 {
+  margin-bottom: 1rem;
+  line-height: 1.15;
+}
+
+.analysisForm > div,
+#contactForm > div {
+  margin-bottom: 1rem;
+}
+
+.analysisForm label,
+#contactForm label {
+  display: block;
+  margin-bottom: 0.45rem;
+  width: auto;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.analysisForm input[type="text"],
+.analysisForm input[type="number"],
+.analysisForm select,
+#contactForm input,
+#contactForm textarea {
+  width: 100%;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface-strong);
+  color: var(--text);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.analysisForm input[type="text"]:focus,
+.analysisForm input[type="number"]:focus,
+.analysisForm select:focus,
+#contactForm input:focus,
+#contactForm textarea:focus {
+  outline: none;
+  border-color: rgba(31, 122, 87, 0.42);
+  box-shadow: 0 0 0 4px rgba(31, 122, 87, 0.12);
+}
+
+.analysisForm input[type="radio"] {
+  accent-color: var(--primary);
+  margin-left: 0.25rem;
+}
+
+.analysisForm > div:has(input[type="radio"]) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.analysisForm > div:has(input[type="radio"]) label {
+  margin-bottom: 0;
+  display: inline;
+}
+
+button {
+  appearance: none;
+  border: 0;
+  border-radius: 14px;
+  padding: 0.85rem 1.2rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), #2b9b6c);
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(31, 122, 87, 0.2);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+button:hover,
+button:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 24px rgba(31, 122, 87, 0.24);
+  filter: brightness(1.02);
+  outline: none;
+}
+
+.analysisForm button,
+#contactForm button {
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+#report,
+#result {
+  padding: 1rem;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(231, 244, 238, 0.9), rgba(255, 255, 255, 0.85));
+  border: 1px solid rgba(31, 122, 87, 0.12);
+  word-wrap: break-word;
+  line-height: 1.6;
+}
+
+#report {
+  min-height: 260px;
+}
+
+#report h3,
+#report h4,
+#report h5,
+#report p {
+  margin: 0;
+}
+
+.report-empty,
+.report-summary,
+.report-section,
+.report-subsection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.report-empty {
+  align-items: flex-start;
+}
+
+.report-kicker {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(31, 122, 87, 0.12);
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.report-summary {
+  padding: 1.1rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(31, 122, 87, 0.12), rgba(255, 255, 255, 0.9));
+  border: 1px solid rgba(31, 122, 87, 0.12);
+}
+
+.report-summary h3 {
+  font-size: 1.35rem;
+  color: var(--primary-dark);
+}
+
+.report-summary p,
+.report-empty p {
+  color: var(--muted);
+}
+
+.report-total {
+  font-size: 2.4rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--primary-dark);
+}
+
+.report-total-label {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.report-section {
+  margin-top: 0.25rem;
+}
+
+.report-section h4 {
+  font-size: 1.05rem;
+  color: var(--primary-dark);
+}
+
+.report-subsection h5 {
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
+.report-grid,
+.report-grid-compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.report-grid-compact {
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+}
+
+.report-item {
+  padding: 0.85rem 0.9rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(23, 49, 38, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.report-item span {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.report-item strong {
+  font-size: 1.35rem;
+  color: var(--primary-dark);
+}
+
+.report-subsections {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.report-item-compact strong {
+  font-size: 1.15rem;
+}
+
+.searchCondition {
+  min-height: 100%;
+}
+
+#result {
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.85rem;
+  text-align: left;
+}
+
+#result img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 12px 24px rgba(23, 49, 38, 0.14);
+}
+
+#contactForm {
+  width: min(100% - 2rem, 640px);
+  margin: 1.5rem auto 3rem;
+  padding: 1.5rem;
+}
+
+#contactForm textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+@media (max-width: 960px) {
+  .container {
+    grid-template-columns: 1fr;
   }
-  
+
+  #result {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 720px) {
+  nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  nav ul {
+    justify-content: flex-start;
+  }
+
+  nav input[type="text"] {
+    width: 100%;
+  }
+
+  .container {
+    width: min(100% - 1rem, 1180px);
+    margin-top: 1rem;
+  }
+
+  .analysisForm,
+  .searchCondition,
+  #contactForm {
+    padding: 1.1rem;
+  }
+}
